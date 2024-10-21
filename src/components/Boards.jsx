@@ -16,6 +16,7 @@ export const Boards = () => {
             flexGrow: grow,
             minHeight: "60px"
         };
+
     };
 
     const images = Array.from({length: 5});
