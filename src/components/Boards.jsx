@@ -1,6 +1,10 @@
 import {Box, Button, Stack} from "@mui/material";
-import MainWrapper from "./MainWrapper.jsx";
 import AddIcon from '@mui/icons-material/Add';
+import BottomNav from "./BottomNav.jsx";
+import TopBar from "./TopBar.jsx";
+import * as React from "react";
+
+const DISPLAYED_BOARDS = 5
 
 export const Boards = () => {
     const squareStyles = (grow, last) => {
@@ -14,35 +18,39 @@ export const Boards = () => {
         };
     };
 
-    const images = Array.from({length: 1});
-    console.log(Math.max(images.length, 4))
+    const images = Array.from({length: 5});
     return (
-        <MainWrapper>
-            <Box height="100%" width={"100%"}>
-                <Box sx={{height: "calc(100% - 56px)", width: "100%", overflowY: "auto"}}>
-                    <Stack height={images.length <= 5 ? "100%" : "105%"}>
-                        {images.map((_, i) => (
-                            i <= 4 ?
-                                (<Box key={i} sx={squareStyles(Math.min(images.length, 5) - i)}>
-                                    <img src="../assets/image.jpg" alt="image"/>
-                                    {i}
-                                </Box>) : null
-                        ))}
-                    </Stack>
-                    <Stack>
-                        {images.map((_, i) => (
-                            i > 4 ?
-                                (<Box key={i} sx={squareStyles(1)}>
-                                    <img src="../assets/image.jpg" alt="image"/>
-                                    {i}
-                                </Box>) : null
-                        ))}
-                    </Stack>
+        <>
+            <TopBar header="View Name"/>
+            <Stack height={"100%"}>
+                <Box sx={{height: "calc(100% - 56px)", width: "100%"}}>
+                    {images.map((_, i) => (
+                        i < DISPLAYED_BOARDS ?
+                            (<Box key={i} sx={squareStyles(Math.min(images.length, DISPLAYED_BOARDS) - i)}>
+                                <img src="../assets/image.jpg" alt="image"/>
+                                {i}
+                            </Box>) : null
+                    ))}
                 </Box>
-                <Button variant="contained" size="large" sx={{margin: 1, width: "calc(100% - 16px)"}}>
-                    <AddIcon/>
-                </Button>
-            </Box>
-        </MainWrapper>
+
+            </Stack>
+            <>
+                <div style={{height: "56px"}}/>
+                <Box sx={{
+                    backgroundColor: "background.default",
+                    width: "100%",
+                    position: "fixed",
+                    bottom: "56px",
+                }}>
+                    <Button variant="contained" size="large"
+                            sx={{
+                                margin: 1,
+                                width: "calc(100% - 16px)",
+                            }}>
+                        <AddIcon/>
+                    </Button>
+                </Box></>
+            <BottomNav/>
+        </>
     );
 };

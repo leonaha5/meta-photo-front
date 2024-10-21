@@ -9,19 +9,23 @@ const BottomNav = () => {
     const [value, setValue] = React.useState(0);
 
     return (
-        <Box sx={{width: '100%'}}>
-            <BottomNavigation
-                showLabels
-                value={value}
-                onChange={(event, newValue) => {
-                    setValue(newValue);
-                }}
-            >
-                <BottomNavigationAction icon={<Home/>}/>
-                <BottomNavigationAction icon={<DashboardCustomizeIcon/>}/>
-                <BottomNavigationAction icon={<Settings/>}/>
-            </BottomNavigation>
-        </Box>
+        <>
+            <Box sx={{width: '100%', position: 'fixed', bottom: 0, left: 0, right: 0}}>
+                <BottomNavigation
+                    showLabels
+                    value={value}
+                    onChange={(event, newValue) => {
+                        setValue(newValue);
+                    }}
+                >
+                    <BottomNavigationAction icon={<Home/>}/>
+                    <BottomNavigationAction icon={<DashboardCustomizeIcon/>}/>
+                    <BottomNavigationAction icon={<Settings/>}/>
+                </BottomNavigation>
+            </Box>
+            <div style={{height: "56px"}}/>
+        </>
     );
 }
-export default BottomNav
+
+export default BottomNav;

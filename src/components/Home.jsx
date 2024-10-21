@@ -1,10 +1,11 @@
 import {Box, IconButton, Stack, Tab, Tabs} from "@mui/material";
-import MainWrapper from "./MainWrapper.jsx";
 import {useState} from "react";
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
 import DownloadIcon from '@mui/icons-material/Download';
+import TopBar from "./TopBar.jsx";
+import BottomNav from "./BottomNav.jsx";
 
 
 const Home = () => {
@@ -24,13 +25,17 @@ const Home = () => {
     };
 
     return (
-        <MainWrapper>
-            <Box sx={{position: "sticky", width: "100%"}}>
+        <>
+            <TopBar header="View Name"/>                <>
+            <Box sx={{position: "fixed", width: "100%", backgroundColor: "background.default"}}>
                 <Tabs value={value} onChange={handleChange} centered>
                     <Tab label="Following" sx={{width: "40%"}}/>
                     <Tab label="Your Photos" sx={{width: "40%"}}/>
                 </Tabs>
             </Box>
+            <div style={{height: "48px"}}/>
+        </>
+
             <Box sx={{width: "100%", height: "calc(100% - 48px)", overflow: "auto"}}>
                 {value === 0 &&
                     <Box
@@ -77,7 +82,8 @@ const Home = () => {
 
                     </Box>}
             </Box>
-        </MainWrapper>
+            <BottomNav/>
+        </>
     );
 };
 
