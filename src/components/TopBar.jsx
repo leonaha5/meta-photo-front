@@ -6,7 +6,8 @@ import {useTheme} from "@mui/material/styles";
 
 export default function TopBar({header}) {
     const theme = useTheme(); // Accessing theme to dynamically handle spacing
-
+    // TODO: FUNCTIONAL AVATAR
+    // TODO: MORE OPTIONS BUTTON MENU
     return (
         <>
             <AppBar elevation={0} position="fixed">
@@ -22,7 +23,7 @@ export default function TopBar({header}) {
                     </Stack>
                 </Toolbar>
             </AppBar>
-            
+
             <div style={{height: theme.mixins.toolbar.minHeight}}/>
         </>
     );

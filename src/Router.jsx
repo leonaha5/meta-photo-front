@@ -9,7 +9,7 @@ function Router() {
         <Box sx={{width: "100vw", height: "100vh"}}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/home"
+                    <Route path="/"
                            element={<Home/>}/>
                     <Route path="/boards"
                            element={<Boards/>}/>

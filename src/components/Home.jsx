@@ -24,7 +24,7 @@ const Home = () => {
     const handleChange = (e, newValue) => {
         setValue(newValue);
     };
-
+    // TODO: DESKTOP LAYOUT AND RESPONSIVENESS
     return (
         <>
             <TopBar header="View Name"/>                <>
@@ -53,9 +53,9 @@ const Home = () => {
                             margin: "16px", // Center the grid
                         }}
                     >
-                        {Array.from({length: 20}).map(() => {
+                        {Array.from({length: 20}).map((i) => {
                             return (
-                                <Stack>
+                                <Stack key={i}>
                                     <Box sx={squareStyles}/>
                                     <Stack direction="row">
                                         <IconButton sx={{flexGrow: 1, justifyContent: "flex-start"}}>
@@ -83,7 +83,7 @@ const Home = () => {
                             margin: "16px", // Center the grid
                         }}
                     >
-                        {Array.from({length: 100}).map(() => <Box sx={squareStyles}/>)}
+                        {Array.from({length: 100}).map((i) => <Box key={i} sx={squareStyles}/>)}
 
                     </Box>}
             </Box>
