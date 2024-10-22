@@ -2,7 +2,6 @@ import {Box, Button, Stack} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import BottomNav from "./BottomNav.jsx";
 import TopBar from "./TopBar.jsx";
-import * as React from "react";
 
 const DISPLAYED_BOARDS = 5
 

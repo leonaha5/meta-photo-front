@@ -1,15 +1,16 @@
 import {Box, IconButton, Stack, Tab, Tabs} from "@mui/material";
 import {useState} from "react";
+import TopBar from "./TopBar.jsx";
+import BottomNav from "./BottomNav.jsx";
+import {useTheme} from "@mui/material/styles";
 
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
 import DownloadIcon from '@mui/icons-material/Download';
-import TopBar from "./TopBar.jsx";
-import BottomNav from "./BottomNav.jsx";
-
 
 const Home = () => {
     // Common styles for the squares
+    const theme = useTheme();
     const squareStyles = {
         backgroundColor: "gray",
         paddingBottom: "100%", // Ensures the square aspect ratio
@@ -36,7 +37,11 @@ const Home = () => {
             <div style={{height: "48px"}}/>
         </>
 
-            <Box sx={{width: "100%", height: "calc(100% - 48px)", overflow: "auto"}}>
+            <Box sx={{
+                width: "100%",
+                height: `calc(100vh - ${theme.mixins.toolbar.minHeight}px - 48px - 56px)`,
+                overflow: "auto"
+            }}>
                 {value === 0 &&
                     <Box
                         sx={{
@@ -48,9 +53,9 @@ const Home = () => {
                             margin: "16px", // Center the grid
                         }}
                     >
-                        {Array.from({length: 100}).map((i) => {
+                        {Array.from({length: 20}).map(() => {
                             return (
-                                <Stack key={i}>
+                                <Stack>
                                     <Box sx={squareStyles}/>
                                     <Stack direction="row">
                                         <IconButton sx={{flexGrow: 1, justifyContent: "flex-start"}}>
@@ -78,7 +83,7 @@ const Home = () => {
                             margin: "16px", // Center the grid
                         }}
                     >
-                        {Array.from({length: 100}).map((i) => <Box key={i} sx={squareStyles}/>)}
+                        {Array.from({length: 100}).map(() => <Box sx={squareStyles}/>)}
 
                     </Box>}
             </Box>
