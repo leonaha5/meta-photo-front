@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./components/Home.jsx";
 import {Boards} from "./components/Boards.jsx";
 import {Box} from "@mui/material";
+import {Board} from "./components/Board.jsx";
 
 function Router() {
     return (
@@ -13,6 +14,8 @@ function Router() {
                            element={<Home/>}/>
                     <Route path="/boards"
                            element={<Boards/>}/>
+                    <Route path="/board"
+                           element={<Board/>}/>
                 </Routes>
             </BrowserRouter>
         </Box>

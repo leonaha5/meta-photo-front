@@ -21,7 +21,7 @@ export const Boards = () => {
 
     };
     // TODO: DESKTOP LAYOUT AND RESPONSIVENESS
-    const images = Array.from({length: 1});
+    const images = Array.from({length: 10});
     return (
         <>
             <TopBar header="View Name"/>
