@@ -1,14 +1,15 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import {Home, Settings} from "@mui/icons-material";
 import {Link} from "react-router-dom";
+import {useContext} from "react";
+import {BottomNavContext} from "../contexts/BottomNavContext.js";
+
 
 const BottomNav = () => {
-    const [value, setValue] = React.useState(0);
-    // TODO: ADD CONTEXT FOR THE SELECTED TAB IN THE NAVIGATION
+    const [value, setValue] = useContext(BottomNavContext);
     return (
         <>
             <Box sx={{width: '100%', position: 'fixed', bottom: 0, left: 0, right: 0}}>

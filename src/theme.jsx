@@ -5,9 +5,11 @@ const Theme = createTheme({
     palette: {
         mode: 'dark',
         primary: {
+            light: '#d3d3ff',
             main: '#9d9dcc',
             dark: '#575799',
-            light: '#d3d3ff',
+            darker: "#0D0D33",
+
         },
         background: {
             default: '#070811',

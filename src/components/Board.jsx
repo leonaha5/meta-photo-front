@@ -26,7 +26,7 @@ export const Board = () => {
             >
                 <Box sx={{...squareStyles, flexGrow: 2}}>PHOTOS BY USERS</Box>
                 <Box sx={{...squareStyles, flexGrow: 3}}>ALL PHOTOS</Box>
-                <Stack direction='row' flexGrow={2}>
+                <Stack direction='row' flexGro w={2}>
                     <Box sx={{...squareStyles, flexGrow: 1}}>MAP</Box>
                     <Box sx={{...squareStyles, flexGrow: 1}}>TIMELINE</Box>
                 </Stack>
