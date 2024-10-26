@@ -27,7 +27,7 @@ const Home = () => {
     // TODO: DESKTOP LAYOUT AND RESPONSIVENESS
     return (
         <>
-            <TopBar header="View Name"/>                <>
+            <TopBar header="View Name" root/>                <>
             <Box sx={{position: "fixed", width: "100%", backgroundColor: "background.default"}}>
                 <Tabs value={value} onChange={handleChange} centered>
                     <Tab label="Following" sx={{width: "40%"}}/>

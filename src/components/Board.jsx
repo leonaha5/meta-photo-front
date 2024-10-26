@@ -2,6 +2,7 @@ import {Box, Stack} from "@mui/material";
 import BottomNav from "./BottomNav.jsx";
 import TopBar from "./TopBar.jsx";
 import {useTheme} from "@mui/material/styles";
+import {Link} from "react-router-dom";
 
 export const Board = () => {
     const theme = useTheme();
@@ -24,9 +25,9 @@ export const Board = () => {
                     height: `calc(100vh - 56px - ${theme.mixins.toolbar.minHeight}px)`
                 }}
             >
-                <Box sx={{...squareStyles, flexGrow: 2}}>PHOTOS BY USERS</Box>
-                <Box sx={{...squareStyles, flexGrow: 3}}>ALL PHOTOS</Box>
-                <Stack direction='row' flexGro w={2}>
+                <Box sx={{...squareStyles, flexGrow: 2}} component={Link} to={"/photosbyusers"}>PHOTOS BY USERS</Box>
+                <Box sx={{...squareStyles, flexGrow: 3}} component={Link} to={"/allphotos"}>ALL PHOTOS</Box>
+                <Stack direction='row' flexGrow={2}>
                     <Box sx={{...squareStyles, flexGrow: 1}}>MAP</Box>
                     <Box sx={{...squareStyles, flexGrow: 1}}>TIMELINE</Box>
                 </Stack>

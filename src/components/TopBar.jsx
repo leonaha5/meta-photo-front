@@ -1,12 +1,14 @@
 import {AppBar, Avatar, Box, IconButton, Menu, MenuItem, Modal, Paper, Stack, Toolbar, Typography} from "@mui/material";
 import {deepOrange} from "@mui/material/colors";
-import {Close, MoreVert} from "@mui/icons-material";
+import {ArrowBack, Close, MoreVert} from "@mui/icons-material";
 import PropTypes from "prop-types";
 import {useTheme} from "@mui/material/styles";
 import React from "react";
+import {useNavigate} from "react-router-dom";
 
-export default function TopBar({header}) {
+export default function TopBar({header, root}) {
     const theme = useTheme(); // Accessing theme to dynamically handle spacing
+    const navigate = useNavigate()
     const [anchorEl, setAnchorEl] = React.useState(null);
     const menuOpen = Boolean(anchorEl);
     const handleClickMenu = (event) => {
@@ -19,7 +21,6 @@ export default function TopBar({header}) {
     const [modalOpen, setModalOpen] = React.useState(false);
     const handleOpenModal = () => setModalOpen(true);
     const handleCloseModal = () => setModalOpen(false);
-
 
     // TODO: PROFILE MODAL
     return (
@@ -51,9 +52,16 @@ export default function TopBar({header}) {
                     borderRadius: 5,
                     bgcolor: "primary.darker"
                 }}>
-                    <Stack direction={"rows"}
-                           justifyContent={"space-between"}><IconButton><Close/></IconButton><Typography>Profile</Typography><Box
-                        width={"56px"}/></Stack>
+                    <Stack direction={"rows"} justifyContent={"space-between"}>
+                        <IconButton>
+                            <Close/>
+                        </IconButton>
+                        <Typography>
+                            Profile
+                        </Typography>
+                        <Box
+                            width={"56px"}/>
+                    </Stack>
 
                     <Paper sx={{padding: 2}}>
                         <Stack direction={"row"}>
@@ -70,9 +78,15 @@ export default function TopBar({header}) {
             <AppBar elevation={0} position="fixed">
                 <Toolbar>
                     <Stack direction="row" justifyContent="space-between" alignItems="center" width="100%">
-                        <IconButton size="large" edge="start" sx={{mr: 2}} onClick={handleClickMenu}>
-                            <MoreVert/>
-                        </IconButton>
+                        {root ?
+                            <IconButton size="large" edge="start" sx={{mr: 2}} onClick={handleClickMenu}>
+                                <MoreVert/>
+                            </IconButton> :
+                            <IconButton size="large" edge="start" sx={{mr: 2}} onClick={() => {
+                                navigate(-1)
+                            }}>
+                                <ArrowBack/>
+                            </IconButton>}
 
                         <Typography variant="h6" component="div">
                             {header}
@@ -89,4 +103,5 @@ export default function TopBar({header}) {
 
 TopBar.propTypes = {
     header: PropTypes.string.isRequired,
+    root: PropTypes.bool,
 };

@@ -5,6 +5,7 @@ import TopBar from "./TopBar.jsx";
 import {useTheme} from "@mui/material/styles";
 import React from "react";
 import {Close, Upload} from "@mui/icons-material";
+import {Link} from "react-router-dom";
 
 const DISPLAYED_BOARDS = 5
 const squareStyles = (grow) => {
@@ -73,7 +74,7 @@ export const Boards = () => {
                     </Stack>
                 </Paper>
             </Modal>
-            <TopBar header="View Name"/>
+            <TopBar header="View Name" root/>
             <Stack width="100%" // height={"100%"}
                    sx={{
                        overflowY: "auto",
@@ -88,7 +89,8 @@ export const Boards = () => {
                 }}>
                     {images.map((_, i) => (
                         i < DISPLAYED_BOARDS ?
-                            (<Box key={i} sx={squareStyles(Math.min(images.length, DISPLAYED_BOARDS) - i)}>
+                            (<Box key={i} sx={squareStyles(Math.min(images.length, DISPLAYED_BOARDS) - i)}
+                                  component={Link} to={"/board"}>
                                 <img src="../assets/image.jpg" alt="image"/>
                                 {i}
                             </Box>) : null
@@ -97,7 +99,7 @@ export const Boards = () => {
                 <Stack>
                     {images.map((_, i) => (
                         i >= DISPLAYED_BOARDS ?
-                            (<Box key={i} sx={squareStyles(1)}>
+                            (<Box key={i} sx={squareStyles(1)} component={Link} to={"/board"}>
                                 <img src="../assets/image.jpg" alt="image"/>
                                 {i}
                             </Box>) : null
