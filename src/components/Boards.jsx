@@ -1,11 +1,13 @@
-import {Box, Button, Fab, IconButton, Modal, Paper, Stack, TextField, Typography} from "@mui/material";
+import {Box, Fab, Stack} from "@mui/material";
 import AddIcon from '@mui/icons-material/Add';
 import BottomNav from "./BottomNav.jsx";
 import TopBar from "./TopBar.jsx";
 import {useTheme} from "@mui/material/styles";
-import React from "react";
-import {Close, Upload} from "@mui/icons-material";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import AddBoardModal from "./AddBoardModal.jsx";
+
 
 const DISPLAYED_BOARDS = 5
 const squareStyles = (grow) => {
@@ -20,62 +22,37 @@ const squareStyles = (grow) => {
 
 };
 
+
 export const Boards = () => {
     const theme = useTheme();
 
     const [modalOpen, setModalOpen] = React.useState(false);
+
+    const [images, setImages] = useState([]);
     const handleOpenModal = () => setModalOpen(true);
     const handleCloseModal = () => setModalOpen(false);
 
+    useEffect(() => {
+
+        axios.get(`http://localhost:4000/boards/user/67261b44afe3f93052c27a2e`)
+            .then(response => {
+                console.log(response.data);
+                setImages(response.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+    }, [])
+
 
     // TODO: DESKTOP LAYOUT AND RESPONSIVENESS
-    const images = Array.from({length: 10});
     return (
         <>
-            <Modal
-                open={modalOpen}
-                onClose={handleCloseModal}
-            >
-                <Paper sx={{
-                    position: 'absolute',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    padding: 2,
-                    minWidth: 350,
-                    width: "90%",
-                    borderRadius: 5,
-                }}>
-                    <Stack spacing={1}>
-                        <Stack direction={'row'} justifyContent={'space-between'}>
-                            <IconButton onClick={handleCloseModal}>
-                                <Close/>
-                            </IconButton>
-                            <Typography>
-                                Create a Board
-                            </Typography>
-                            <Box width={'56px'}/>
-                        </Stack>
-                        <Button variant={'outlined'} sx={{height: 150}}>
-                            <Stack alignItems={'center'} justifyContent={'center'}>
-                                <Upload sx={{fontSize: 60}}/>
-                                <Typography>
-                                    Upload a cover image
-                                </Typography>
-                            </Stack>
-                        </Button>
-                        <TextField fullWidth label={"Name"}/>
-                        <TextField fullWidth label={"Description"}/>
-                        <Stack width={'100%'} directon={'row'} alignItems={'flex-end'}>
-                            <Button variant={"contained"} sx={{maxWidth: 100}}>
-                                Save
-                            </Button>
-                        </Stack>
-                    </Stack>
-                </Paper>
-            </Modal>
+            <AddBoardModal modalOpen={modalOpen} handleCloseModal={handleCloseModal}/>
             <TopBar header="View Name" root/>
-            <Stack width="100%" // height={"100%"}
+            <Stack width="100%"
                    sx={{
                        overflowY: "auto",
                        minHeight: `calc(100vh - 56px - ${theme.mixins.toolbar.minHeight}px)`,
@@ -87,21 +64,21 @@ export const Boards = () => {
                     minHeight: `calc(100vh - 56px - ${theme.mixins.toolbar.minHeight}px)`,
                     height: `calc(100vh - 56px - ${theme.mixins.toolbar.minHeight}px)`
                 }}>
-                    {images.map((_, i) => (
-                        i < DISPLAYED_BOARDS ?
-                            (<Box key={i} sx={squareStyles(Math.min(images.length, DISPLAYED_BOARDS) - i)}
+                    {images.map((image, index) => (
+                        index < DISPLAYED_BOARDS ?
+                            (<Box key={index} sx={squareStyles(Math.min(images.length, DISPLAYED_BOARDS) - index)}
                                   component={Link} to={"/board"}>
-                                <img src="../assets/image.jpg" alt="image"/>
-                                {i}
+                                <img src="../assets/image.jpg" alt=""/>
+                                {image.name}
                             </Box>) : null
                     ))}
                 </Stack>
                 <Stack>
-                    {images.map((_, i) => (
-                        i >= DISPLAYED_BOARDS ?
-                            (<Box key={i} sx={squareStyles(1)} component={Link} to={"/board"}>
+                    {images.map((image, index) => (
+                        index >= DISPLAYED_BOARDS ?
+                            (<Box key={index} sx={squareStyles(1)} component={Link} to={"/board"}>
                                 <img src="../assets/image.jpg" alt="image"/>
-                                {i}
+                                {image.name}
                             </Box>) : null
                     ))}
                 </Stack>

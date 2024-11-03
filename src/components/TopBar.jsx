@@ -52,7 +52,7 @@ export default function TopBar({header, root}) {
                     borderRadius: 5,
                     bgcolor: "primary.darker"
                 }}>
-                    <Stack direction={"rows"} justifyContent={"space-between"}>
+                    <Stack direction={"row"} justifyContent={"space-between"}>
                         <IconButton>
                             <Close/>
                         </IconButton>
