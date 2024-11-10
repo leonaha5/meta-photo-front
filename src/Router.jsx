@@ -1,32 +1,47 @@
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, useRoutes} from 'react-router-dom';
+import {Box} from '@mui/material';
 
-import Home from "./components/Home.jsx";
-import {Boards} from "./components/Boards.jsx";
-import {Box} from "@mui/material";
-import {Board} from "./components/Board.jsx";
-import {PhotosByUsers} from "./components/PhotosByUsers.jsx";
-import AllPhotos from "./components/AllPhotos.jsx";
+import Home from './components/Home.jsx';
+import Boards from './components/Boards.jsx';
+import Board from './components/Board.jsx';
+import PhotosByUsers from './components/PhotosByUsers.jsx';
+import AllPhotos from './components/AllPhotos.jsx';
 
 function Router() {
+    const routes = useRoutes([
+        {
+            path: '/',
+            element: <Home/>,
+        },
+        {
+            path: '/boards',
+            element: <Boards/>,
+            children: [
+                {
+                    path: ':id',
+                    element: <Board/>,
+                    children: [
+                        {
+                            path: 'allphotos',
+                            element: <AllPhotos/>,
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            path: '/photosbyusers',
+            element: <PhotosByUsers/>,
+        },
+    ]);
+
     return (
-        <Box sx={{width: "100vw", height: "100vh"}}>
+        <Box sx={{width: '100vw', height: '100vh'}}>
             <BrowserRouter>
-                <Routes>
-                    <Route path="/"
-                           element={<Home/>}/>
-                    <Route path="/boards"
-                           element={<Boards/>}/>
-                    <Route path="/board"
-                           element={<Board/>}/>
-                    <Route path="/photosbyusers"
-                           element={<PhotosByUsers/>}/>
-                    <Route path={"allphotos"}
-                           element={<AllPhotos/>}/>
-                </Routes>
+                {routes}
             </BrowserRouter>
         </Box>
-
-    )
+    );
 }
 
-export default Router
+export default Router;
