@@ -11,6 +11,7 @@ import {DeleteOutline} from "@mui/icons-material";
 
 
 const DISPLAYED_BOARDS = 5
+
 const squareStyles = (grow, bgImg) => {
     return {
         backgroundImage: `url(${bgImg})`,
@@ -31,7 +32,7 @@ const squareStyles = (grow, bgImg) => {
 };
 
 
-export const Boards = () => {
+const Boards = () => {
     const theme = useTheme();
 
     const [modalOpen, setModalOpen] = React.useState(false);
@@ -157,3 +158,5 @@ export const Boards = () => {
         </>
     );
 };
+
+export default Boards

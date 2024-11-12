@@ -5,7 +5,7 @@ import {useTheme} from "@mui/material/styles";
 import {deepPurple} from "@mui/material/colors";
 import {MoreVert} from "@mui/icons-material";
 
-export const PhotosByUsers = () => {
+const PhotosByUsers = () => {
     const theme = useTheme();
 
     const squareStyles = {
@@ -56,3 +56,4 @@ export const PhotosByUsers = () => {
         </>
     );
 };
+export default PhotosByUsers

@@ -5,12 +5,15 @@ import {useTheme} from "@mui/material/styles";
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import ImagePreviewModal from "./ImagePreviewModal.jsx";
 
 const Home = () => {
     // Common styles for the squares
     const theme = useTheme();
     const {id} = useParams();
     const [images, setImages] = useState([]);
+    const [previewModalOpen, setPreviewModalOpen] = useState(false);
+    const [imageUrl, setImageUrl] = useState("");
 
     useEffect(() => {
         axios.get(`http://localhost:4000/images/board/${id}`)
@@ -23,10 +26,20 @@ const Home = () => {
             });
     }, [id]);
 
+    const handleCloseModal = () => {
+        setPreviewModalOpen(false);
+    }
+    const handleOpenModal = (imgUrl) => {
+        setImageUrl(imgUrl)
+        setPreviewModalOpen(true)
+    }
+
 
     return (
         <>
             <TopBar header="View Name"/>
+
+            <ImagePreviewModal open={previewModalOpen} onClose={handleCloseModal} imgSrc={imageUrl}/>
 
 
             <Box sx={{
@@ -54,6 +67,7 @@ const Home = () => {
                         <img
                             src={`http://localhost:4000/images/files/${image.filename}`}
                             alt={image.filename}
+                            onClick={() => handleOpenModal(`http://localhost:4000/images/files/${image.filename}`)}
                             style={{
                                 width: '100%',
                                 height: '100%',

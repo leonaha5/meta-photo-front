@@ -3,8 +3,10 @@ import BottomNav from "./BottomNav.jsx";
 import TopBar from "./TopBar.jsx";
 import {useTheme} from "@mui/material/styles";
 import {Link, useParams} from "react-router-dom";
+import {useState} from "react";
+import AddPicturesModal from "./AddPicturesModal.jsx";
 
-export const Board = () => {
+const Board = () => {
     const theme = useTheme();
     const {id} = useParams();
     const squareStyles = {
@@ -14,8 +16,16 @@ export const Board = () => {
         minHeight: "60px",
         margin: 1,
     };
+
+    const [addPhotosModalOpen, setAddPhotosModalOpen] = useState(false);
+
+    const handleCloseModal = () => {
+        setAddPhotosModalOpen(false);
+    }
+
     return (
         <>
+            <AddPicturesModal modalOpen={addPhotosModalOpen} handleCloseModal={handleCloseModal}/>
             <TopBar header="View Name"/>
             <Stack
                 sx={{
@@ -32,7 +42,7 @@ export const Board = () => {
                     <Box sx={{...squareStyles, flexGrow: 1}}>MAP</Box>
                     <Box sx={{...squareStyles, flexGrow: 1}}>TIMELINE</Box>
                 </Stack>
-                <Box sx={{...squareStyles, flexGrow: 1}}>ADD</Box>
+                <Box sx={{...squareStyles, flexGrow: 1}} onClick={() => setAddPhotosModalOpen(true)}>ADD</Box>
 
 
             </Stack>
@@ -41,3 +51,4 @@ export const Board = () => {
         </>
     );
 };
+export default Board
